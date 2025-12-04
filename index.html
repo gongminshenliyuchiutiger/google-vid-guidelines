@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Vids 新手完全攻略</title>
+    <style>
+        /* --- 基礎設定 --- */
+        :root {
+            --primary-color: #4285F4; /* Google Blue */
+            --secondary-color: #34A853; /* Google Green */
+            --accent-color: #EA4335; /* Google Red */
+            --bg-light: #f8f9fa;
+            --text-dark: #202124;
+            --text-grey: #5f6368;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+            position: relative;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- 導航列 --- */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-dark);
+        }
+
+        .logo span {
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* --- 通用容器 --- */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--text-dark);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            color: var(--text-grey);
+            font-size: 1.1rem;
+        }
+
+        /* --- 首頁 Hero --- */
+        #home {
+            margin-top: 60px;
+            text-align: center;
+            padding: 8rem 2rem;
+            background: linear-gradient(135deg, #e8f0fe 0%, #ffffff 100%);
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title span {
+            color: var(--primary-color);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 2rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(66, 133, 244, 0.4);
+        }
+
+        /* --- 快速開始 (Steps) --- */
+        .step-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .step-card {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 16px;
+            border-left: 5px solid var(--primary-color);
+            transition: transform 0.3s;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .step-num {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #dadce0;
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- 核心功能 (Grid) --- */
+        #features {
+            background-color: var(--white);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .feature-item {
+            padding: 2rem;
+            border: 1px solid #eee;
+            border-radius: 12px;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* --- 進階技巧 (Prompt Box) --- */
+        #tips {
+            background-color: #e8f0fe;
+            border-radius: 20px;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .prompt-box {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 2px dashed var(--primary-color);
+            margin-top: 1rem;
+        }
+
+        .formula {
+            font-family: monospace;
+            background: #eee;
+            padding: 0.5rem;
+            border-radius: 4px;
+            color: #d93025;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        /* --- FAQ --- */
+        .faq-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .faq-question {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            color: #9aa0a6;
+            font-size: 0.9rem;
+        }
+
+        /* --- 吉祥物樣式 (Mascot) --- */
+        .mascot-container {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 9999;
+            width: 100px; 
+            height: auto;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .mascot-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* 懸停動畫設定 */
+        .mascot-container:hover {
+            animation: jitter 0.2s infinite linear; 
+            filter: drop-shadow(0 0 5px #fff) 
+                    drop-shadow(0 0 10px #ff00de) 
+                    drop-shadow(0 0 20px #00ffff)
+                    drop-shadow(0 0 30px #ff00de);
+        }
+
+        @keyframes jitter {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(-3px, 3px) rotate(-5deg); }
+            50% { transform: translate(3px, -3px) rotate(5deg); }
+            75% { transform: translate(-3px, -3px) rotate(-5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        /* --- 手機版適配 --- */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .features-grid { grid-template-columns: 1fr; }
+            h2 { font-size: 2rem; }
+            .mascot-container { width: 70px; bottom: 10px; left: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 導航列 -->
+    <header>
+        <nav>
+            <div class="logo">Google <span>Vids</span> 教學站</div>
+            <div class="nav-links">
+                <a href="#home">首頁</a>
+                <a href="#quick-start">快速教學</a>
+                <a href="#features">核心功能</a>
+                <a href="#tips">進階技巧</a>
+                <a href="#faq">FAQ</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 首頁 Hero Section -->
+    <section id="home">
+        <h1 class="hero-title">5分鐘學會<br>用 <span>AI</span> 製作專業影片</h1>
+        <p>歡迎來到 Google Vids 新手村。不用學剪輯、不用找素材，輸入文字讓 Gemini AI 幫你搞定工作報告與教學影片。</p>
+        <a href="#quick-start" class="cta-button">開始學習</a>
+    </section>
+
+    <!-- 快速開始 -->
+    <section id="quick-start">
+        <h2>🚀 四步驟快速上手</h2>
+        <div class="step-container">
+            <div class="step-card">
+                <div class="step-num">01</div>
+                <h3>輸入提示詞</h3>
+                <p>在 Google Drive 新增 Vids 檔案，告訴 AI：「幫我做一個 2 分鐘的產品介紹影片」，或直接貼上文件連結。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">02</div>
+                <h3>確認分鏡大綱</h3>
+                <p>AI 會自動產出影片架構。你可以拖曳調整順序、刪除段落，並選擇喜歡的視覺風格。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">03</div>
+                <h3>編輯與錄音</h3>
+                <p>像做 PPT 一樣修改文字與圖片。使用「腳本轉語音」功能，讓 AI 幫你唸出旁白。</p>
+            </div>
+            <div class="step-card">
+                <div class="step-num">04</div>
+                <h3>匯出分享</h3>
+                <p>完成後，點擊分享邀請同事協作，或匯出成 MP4 檔案用於報告。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心功能 -->
+    <section id="features">
+        <h2>✨ 為什麼選擇 Vids？</h2>
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-icon">🎬</div>
+                <h3>百萬圖庫素材</h3>
+                <p>內建 Shutterstock 高品質影片與圖片庫，不用擔心版權問題，輸入關鍵字直接拖曳使用。</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🗣️</div>
+                <h3>AI 語音旁白</h3>
+                <p>不想錄音？沒問題。選擇內建的 AI 聲音，輸入腳本文字，它會用自然語調幫你朗讀。</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🎥</div>
+                <h3>錄影工作室</h3>
+                <p>支援螢幕錄製與視訊鏡頭同時開啟（子母畫面），並附帶提詞機功能，教學影片神器。</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🤝</div>
+                <h3>即時協作</h3>
+                <p>就像 Google Docs 一樣，可以多人同時在線編輯、在特定秒數留言給同事。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 進階技巧 -->
+    <section id="tips">
+        <h2>💡 AI 提示詞秘訣</h2>
+        <p>想要 AI 產出完美的腳本？試試看這個黃金公式：</p>
+        
+        <div class="prompt-box">
+            <span class="formula">[目標受眾] + [影片主題] + [語氣風格] + [影片長度]</span>
+            <p><strong>範例：</strong></p>
+            <p>「為 <u>新進業務人員</u> 製作一支介紹 <u>公司新產品線</u> 的影片，語氣要 <u>專業且充滿活力</u>，長度約 <u>3分鐘</u>。」</p>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+        <h2>❓ 常見問題</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question">Q: Google Vids 是免費的嗎？</div>
+            <p>目前它是 Google Workspace 商業版/教育版的一部分，主要針對企業與教育用戶開放。</p>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Q: 可以用來剪輯 Vlog 嗎？</div>
+            <p>Vids 比較適合「資訊呈現」類的工作影片（如簡報轉影片）。若要剪輯生活 Vlog，建議使用 CapCut 或 Premiere。</p>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">Q: 匯出的影片有浮水印嗎？</div>
+            <p>使用付費的 Workspace 帳號匯出通常沒有浮水印。</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Copyright © Liyuchiutiger Gongminshen</p>
+    </footer>
+
+    <!-- 吉祥物元件 -->
+    <div class="mascot-container" title="Chill Guy">
+        <img src="image/LiyuChillGuy.svg" alt="LiyuChillGuy Mascot">
+    </div>
+
+</body>
+</html>
